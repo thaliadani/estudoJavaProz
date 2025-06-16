@@ -4,25 +4,19 @@ public class sequenciaFibonacci {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println("Digite um número:");
+        System.out.println("Digite a quantidade de números da sequencia:");
         
         int numero = scanner.nextInt();
-        int primeiro = 1;
-        int segundo = 1;
-        int contador= 2;
-
-        System.out.println("Sequência de Fibonacci com " +  numero + " números:");
-        System.out.print(primeiro + ", " + segundo);
+        int ultima = 1;
+        int penultima = 1;
+        int contador= 0;
 
         while (contador < numero) {
-            int proximo = primeiro + segundo;
-            System.out.print(", " + proximo);
-
-            primeiro = segundo;
-            segundo = proximo;
+            int atual = ultima + penultima;
+            System.out.println(atual);
+            penultima = ultima;
+            ultima = atual;
             contador++;
-
         }
     }
-
 }
