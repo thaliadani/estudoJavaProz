@@ -10,8 +10,7 @@ public class numerosPrimos {
         int contador = 1;
 
         while ( contador <= numero) {
-            int resultado= numero%contador;
-            if(resultado == 0){
+            if(numero % contador == 0){
                 div++;
             }
             contador++;
