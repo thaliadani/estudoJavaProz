@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 class Usuario {
@@ -25,18 +26,18 @@ class Usuario {
     }
 }
 
-class Produto(){
-    String nome;
+class Produto{
+    String nomeProduto;
     int estoque;
 
-    Produto(String nome, int estoque){
-        this.nome = nome;
+    Produto(String nomeProduto, int estoque){
+        this.nomeProduto = nomeProduto;
         this.estoque = estoque;
     }
 
     void mostrarProduto() {
         System.out.println("------ Cadastro do produto realizado com sucesso ------");
-        System.out.println("Produto: " + this.nome);
+        System.out.println("Produto: " + this.nomeProduto);
         System.out.println("Estoque: " + this.estoque);
         System.out.println("--------------------------------------------");
     }
@@ -84,10 +85,9 @@ public class App {
 
             // Validando login
             verificacaoLogin = usuario.validarLogin(nomeLogin, emailLogin, senhaLogin);
-            if (verificaoLogin) {
+            if (verificacaoLogin) {
                 System.out.println("Login realizado com sucesso");
                 System.out.println("-------------------------------------------");
-                break;
             } else {
                 System.out.println("Erro ao realizar o login");
                 System.out.println("-------------------------------------------");
@@ -98,22 +98,21 @@ public class App {
                 System.out.println("----------- Cadastro de Produto -----------");
                 System.out.println("----------- Digite 1 para cadastrar o produto -----------");
                 System.out.println("----------- Digite 2 para visualizar todo estoque -----------");
-                System.out.println("----------- Digite 2 para sair do sistema -----------");
+                System.out.println("----------- Digite 3 para sair do sistema -----------");
                 int opcao = sc.nextInt();
 
                 if(opcao == 1){
                     System.out.println("----------- Realizando cadastro do produto -----------");
                     
                     System.out.println("Digite o nome do produto:");
-                    String nome = sc.next();
+                    String nomeProduto = sc.next();
 
                     System.out.println("Digite quantidade de estoque:");
                     int estoque = sc.nextInt();
                     
-                    Produto produto = new Produto(nome, estoque);
+                    Produto produto = new Produto(nomeProduto, estoque);
                     produto.mostrarProduto();
                     listaProdutos.add(produto);
-                    System.out.println("-------------------------------------------");
                 }else if(opcao == 2){
                     System.out.println("----------- Lista dos produtos -----------");
                     for(Produto produto:listaProdutos){
