@@ -21,7 +21,7 @@ class Usuario {
     }
 
     boolean validarLogin(String nomeLogin, String emailLogin, String senhaLogin) {
-        return (this.nome.equals(nomeLogin) && this.email.equals(emailLogin) && this.senha.equals(senha));
+        return (this.nome.equals(nomeLogin) && this.email.equals(emailLogin) && this.senha.equals(senhaLogin));
     }
 }
 
@@ -35,8 +35,8 @@ class Produto(){
     }
 
     void mostrarProduto() {
-        System.out.println("------ Cadastro realizado com sucesso ------");
-        System.out.println("Nome: " + this.nome);
+        System.out.println("------ Cadastro do produto realizado com sucesso ------");
+        System.out.println("Produto: " + this.nome);
         System.out.println("Estoque: " + this.estoque);
         System.out.println("--------------------------------------------");
     }
@@ -47,6 +47,8 @@ public class App {
         Scanner sc = new Scanner(System.in);
 
         boolean verificacaoLogin = false;
+
+        ArrayList<Produto>listaProdutos = new ArrayList<>();
 
         // Cadastro do usuário
         System.out.println("----------- Cadastro da conta -----------");
@@ -82,7 +84,7 @@ public class App {
 
             // Validando login
             verificacaoLogin = usuario.validarLogin(nomeLogin, emailLogin, senhaLogin);
-            if (usuario.validarLogin(nomeLogin, emailLogin, senhaLogin)) {
+            if (verificaoLogin) {
                 System.out.println("Login realizado com sucesso");
                 System.out.println("-------------------------------------------");
                 break;
@@ -92,24 +94,37 @@ public class App {
             }
 
             while (verificacaoLogin) {
-                System.out.println("------------- Login da conta -------------");
+                System.out.println("----------- Acesso ao sistema realizado -----------");
+                System.out.println("----------- Cadastro de Produto -----------");
+                System.out.println("----------- Digite 1 para cadastrar o produto -----------");
+                System.out.println("----------- Digite 2 para visualizar todo estoque -----------");
+                System.out.println("----------- Digite 2 para sair do sistema -----------");
+                int opcao = sc.nextInt();
 
+                if(opcao == 1){
+                    System.out.println("----------- Realizando cadastro do produto -----------");
+                    
+                    System.out.println("Digite o nome do produto:");
+                    String nome = sc.next();
+
+                    System.out.println("Digite quantidade de estoque:");
+                    int estoque = sc.nextInt();
+                    
+                    Produto produto = new Produto(nome, estoque);
+                    produto.mostrarProduto();
+                    listaProdutos.add(produto);
+                    System.out.println("-------------------------------------------");
+                }else if(opcao == 2){
+                    System.out.println("----------- Lista dos produtos -----------");
+                    for(Produto produto:listaProdutos){
+                        produto.mostrarProduto();
+                    }
+                    System.out.println("-------------------------------------------");
+                }else{
+                    System.out.println("----------- Saindo do sistema -----------");
+                    break;
+                }
             }
-
-            System.out.println("----------- Cadastro de Produto -----------");
-
-            System.out.println("Digite o nome de usuário:");
-            String nome = sc.next();
-
-            System.out.println("Digite quantidade de estoque:");
-            String estoque = sc.nextInt();
-
-            System.out.println("-------------------------------------------");
-
-            Produto produto = new Produto(nome, estoque);
-            mostrarProduto();
-
         }
-
     }
 }
