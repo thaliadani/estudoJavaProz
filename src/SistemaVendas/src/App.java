@@ -1,3 +1,4 @@
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,7 +15,9 @@ class Usuario {
     }
 
     void mostrarUsuario() {
-        System.out.println("Cadastro realizado com sucesso...");
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("------------- Cadastro do usuário realizado com sucesso -------------");
+        System.out.println("---------------------------------------------------------------------");
         System.out.println("Nome: " + this.nome);
         System.out.println("Email: " + this.email);
         System.out.println("Senha: " + this.senha);
@@ -50,6 +53,7 @@ class Usuario {
 }
 
 class Cliente {
+
     String nome;
     String cpf;
     String contato;
@@ -69,8 +73,10 @@ class Cliente {
     }
 
     void mostrarCliente() {
-        System.out.println("Cadastro do cliente realizado com sucesso...");
-        System.out.println("Cliente: " + this.nome);
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("------------- Cadastro do cliente realizado com sucesso -------------");
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("Nome: " + this.nome);
         System.out.println("CPF: " + this.cpf);
         System.out.println("Contato: " + this.contato);
     }
@@ -93,17 +99,21 @@ class Cliente {
 }
 
 class Produto {
+
     String nomeProduto;
     int estoque;
     int valorProduto;
 
-    Produto(String nomeProduto, int estoque,int valorProduto) {
+    Produto(String nomeProduto, int estoque, int valorProduto) {
         this.nomeProduto = nomeProduto;
         this.estoque = estoque;
         this.valorProduto = valorProduto;
     }
 
     void mostrarProduto() {
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("------------- Cadastro do produto realizado com sucesso -------------");
+        System.out.println("---------------------------------------------------------------------");
         System.out.println("Produto: " + this.nomeProduto);
         System.out.println("Estoque: " + this.estoque);
         System.out.println("Valor: " + this.valorProduto);
@@ -132,25 +142,52 @@ class Produto {
     public void setValorProduto(int valorProduto) {
         this.valorProduto = valorProduto;
     }
+
+    static class valorProduto {
+
+        public valorProduto() {
+        }
+    }
 }
 
-class Vendas{
-    int quantidadeVendas;
+class Venda {
 
-    public Vendas(int quantidadeVendas) {
-        this.quantidadeVendas = quantidadeVendas;
+    Produto produto;
+    Cliente cliente;
+
+    public Venda(Cliente cliente, Produto produto) {
+        this.cliente = cliente;
+        this.produto = produto;
     }
 
-    public int getQuantidadeVendas() {
-        return quantidadeVendas;
+    void mostrarVenda() {
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("-------------- Cadastro da Venda realizado com sucesso --------------");
+        System.out.println("---------------------------------------------------------------------");
+        System.out.println("Produto: " + this.produto.nomeProduto);
+        System.out.println("Cliente: " + this.cliente.nome);
+        System.out.println("Valor: R$" + this.produto.valorProduto);
     }
 
-    public void setQuantidadeVendas(int quantidadeVendas) {
-        this.quantidadeVendas = quantidadeVendas;
-    } 
+    public Produto getProduto() {
+        return produto;
+    }
+
+    public void setProduto(Produto produto) {
+        this.produto = produto;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
 }
 
 public class App {
+
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
 
@@ -158,9 +195,18 @@ public class App {
 
         int indiceProduto = 1;
         int indiceCliente = 1;
+        int indiceVenda = 1;
 
         ArrayList<Produto> listaProdutos = new ArrayList<>();
         ArrayList<Cliente> listaClientes = new ArrayList<>();
+        ArrayList<Cliente> listaVendas = new ArrayList<>();
+
+        Cliente cliente = new Cliente("","","");
+        Produto produto = new Produto("","","");
+
+        clienteASerVendido = cliente;
+        produtoASerVendido = produto;
+
 
         // Cadastro do usuário
         System.out.println("-----------------------------------------");
@@ -201,73 +247,67 @@ public class App {
             } else {
                 System.out.println("Erro ao realizar o login");
             }
-
-            while (verificacaoLogin) {
-                System.out.println("---------------------------------------------------");
-                System.out.println("----------- Acesso ao sistema realizado -----------");
-                System.out.println("---------------------------------------------------");
-                System.out.println("Digite 1 para produtos");
-                System.out.println("Digite 2 para clientes");
-                System.out.println("Digite 3 para vendas");
-                System.out.println("Digite 4 para sair");
-                int opcaoModulo = sc.nextInt();
-
-                if (opcaoModulo == 1) {
-                    System.out.println("------------------------------------------------------------");
-                    System.out.println("----------- Acesso ao sistema produtos realizado -----------");
-                    System.out.println("------------------------------------------------------------");
-                    System.out.println("Digite 1 para cadastrar o produto");
-                    System.out.println("Digite 2 para visualizar todo estoque");
-                    System.out.println("Digite 3 para alterar quantidade do produto");
-                    System.out.println("Digite 4 para remover produto");
-                    System.out.println("Digite 5 para sair do sistema");
-                    int opcao = sc.nextInt();
-
-                    if (opcao == 1) {
+        }
+        
+        while (verificacaoLogin) {
+            System.out.println("---------------------------------------------------");
+            System.out.println("----------- Acesso ao sistema realizado -----------");
+            System.out.println("---------------------------------------------------");
+            System.out.println("Digite 1 para produtos");
+            System.out.println("Digite 2 para clientes");
+            System.out.println("Digite 3 para vendas");
+            System.out.println("Digite 4 para sair");
+            int opcaoModulo = sc.nextInt();
+            switch (opcaoModulo) {
+                case 1 ->{
+                        System.out.println("------------------------------------------------------------");
+                        System.out.println("----------- Acesso ao sistema produtos realizado -----------");
+                        System.out.println("------------------------------------------------------------");
+                        System.out.println("Digite 1 para cadastrar o produto");
+                        System.out.println("Digite 2 para visualizar todo estoque");
+                        System.out.println("Digite 3 para alterar quantidade do produto");
+                        System.out.println("Digite 4 para remover produto");
+                        System.out.println("Digite 5 para sair do sistema");
+                        int opcao = sc.nextInt();
+                        }
+                switch (opcao) {
+                    case 1 -> {
                         System.out.println("------------------------------------------------------");
                         System.out.println("----------- Realizando cadastro do produto -----------");
                         System.out.println("------------------------------------------------------");
-
                         System.out.println("Digite o nome do produto:");
                         String nomeProduto = sc.next();
-
                         System.out.println("Digite quantidade de estoque do produto:");
                         int estoque = sc.nextInt();
-
                         System.out.println("Digite o valor do produto:");
                         int valorProduto = sc.nextInt();
-
-                        Produto produto = new Produto(nomeProduto, estoque,valorProduto);
+                        Produto produto = new Produto(nomeProduto, estoque, valorProduto);
                         produto.mostrarProduto();
                         listaProdutos.add(produto);
-                        System.out.println("Cadastro do produto realizado com sucesso...");
-                    } else if (opcao == 2) {
+                    }
+                    case 2 -> {
                         System.out.println("--------------------------------------------------");
                         System.out.println("----------- Listando todos os produtos -----------");
                         System.out.println("--------------------------------------------------");
-
                         for (Produto produto : listaProdutos) {
                             produto.mostrarProduto();
                         }
-                    } else if (opcao == 3) {
+                    }
+                    case 3 -> {
                         System.out.println("-------------------------------------------------------");
                         System.out.println("----------- Alterando quantidade do Produto -----------");
                         System.out.println("-------------------------------------------------------");
-
                         indiceProduto = 1;
                         for (Produto produto : listaProdutos) {
                             System.out.println("-------------------------------------------");
                             System.out.println("Produto " + indiceProduto);
                             produto.mostrarProduto();
-                            indiceProduto +=1;
+                            indiceProduto += 1;
                         }
-
                         System.out.println("Digite o indice do produto que você quer alterar:");
                         int opProduto = sc.nextInt();
-
                         System.out.println("Digite a nova quantidade do produto:");
                         int quantidadeProduto = sc.nextInt();
-
                         indiceProduto = 1;
                         for (Produto produto : listaProdutos) {
                             if (indiceProduto == opProduto) {
@@ -275,11 +315,11 @@ public class App {
                             }
                             indiceProduto += 1;
                         }
-                    } else if (opcao == 4) {
+                    }
+                    case 4 -> {
                         System.out.println("-----------------------------------------");
                         System.out.println("----------- Removendo Produto -----------");
                         System.out.println("-----------------------------------------");
-
                         indiceProduto = 1;
                         for (Produto produto : listaProdutos) {
                             System.out.println("-------------------------------------------");
@@ -289,59 +329,54 @@ public class App {
                         }
                         System.out.println("Digite o indice do produto que quer remover:");
                         int removerProduto = sc.nextInt();
-
-                        removerProduto-=1;
+                        removerProduto -= 1;
                         listaProdutos.remove(removerProduto);
                         System.out.println("Produto removido com sucesso...");
-
-                    } else if (opcao == 5) {
-                        System.out.println("Saindo do módulo produtos...");
-                        break;
-                    } else {
-                        System.out.println("Opção inválida...");
                     }
-
-                } else if (opcaoModulo == 2) {
-                    System.out.println("---------------------------------------------------------------");
-                    System.out.println("----------- Acesso ao sistema de clientes realizado -----------");
-                    System.out.println("---------------------------------------------------------------");
-                    System.out.println("Digite 1 para cadastrar cliente");
-                    System.out.println("Digite 2 para visualizar clientes");
-                    System.out.println("Digite 3 para alterar clientes");
-                    System.out.println("Digite 4 para remover cliente");
-                    System.out.println("Digite 5 para voltar ao módulo principal");
-                    int opcao = sc.nextInt();
-
-                    if (opcao == 1) {
+                    case 5 -> {
+                        System.out.println("Saindo do módulo produtos...");
+                    }
+                    default -> System.out.println("Opção inválida...");
+                }
+                    }
+                case 2 ->{
+                        System.out.println("---------------------------------------------------------------");
+                        System.out.println("----------- Acesso ao sistema de clientes realizado -----------");
+                        System.out.println("---------------------------------------------------------------");
+                        System.out.println("Digite 1 para cadastrar cliente");
+                        System.out.println("Digite 2 para visualizar clientes");
+                        System.out.println("Digite 3 para alterar clientes");
+                        System.out.println("Digite 4 para remover cliente");
+                        System.out.println("Digite 5 para voltar ao módulo principal");
+                        int opcao = sc.nextInt();
+                }
+                switch (opcao) {
+                    case 1 -> {
                         System.out.println("------------------------------------------------------");
                         System.out.println("----------- Realizando cadastro do Cliente -----------");
                         System.out.println("------------------------------------------------------");
-
                         System.out.println("Digite o nome do cliente:");
                         String nomeCliente = sc.next();
-
                         System.out.println("Digite o cpf do cliente: ");
                         String cpf = sc.next();
-
-                        System.out.println("Digite o cpf do cliente: ");
+                        System.out.println("Digite o contato do cliente: ");
                         String contato = sc.next();
-
                         Cliente cliente = new Cliente(nomeCliente, cpf, contato);
                         cliente.mostrarCliente();
                         listaClientes.add(cliente);
-                    } else if (opcao == 2) {
+                    }
+                    case 2 -> {
                         System.out.println("--------------------------------------------------");
                         System.out.println("----------- Listando todos os Clientes -----------");
                         System.out.println("--------------------------------------------------");
-
                         for (Cliente cliente : listaClientes) {
                             cliente.mostrarCliente();
                         }
-                    } else if (opcao == 3) {
+                    }
+                    case 3 -> {
                         System.out.println("-----------------------------------------");
                         System.out.println("----------- Alterando Cliente -----------");
                         System.out.println("-----------------------------------------");
-
                         indiceCliente = 1;
                         for (Cliente cliente : listaClientes) {
                             System.out.println("-------------------------------------------");
@@ -349,13 +384,10 @@ public class App {
                             cliente.mostrarCliente();
                             indiceCliente += 1;
                         }
-
                         System.out.println("Digite o indice do cliente que você quer alterar:");
                         int opCliente = sc.nextInt();
-
                         System.out.println("Digite o novo contato:");
                         String contatoCliente = sc.next();
-
                         indiceCliente = 1;
                         for (Cliente cliente : listaClientes) {
                             if (indiceCliente == opCliente) {
@@ -363,11 +395,11 @@ public class App {
                             }
                             indiceCliente += 1;
                         }
-                    } else if (opcao == 4) {
+                    }
+                    case 4 -> {
                         System.out.println("-----------------------------------------");
                         System.out.println("----------- Removendo Cliente -----------");
                         System.out.println("-----------------------------------------");
-
                         indiceCliente = 1;
                         for (Cliente cliente : listaClientes) {
                             System.out.println("-------------------------------------------");
@@ -376,109 +408,128 @@ public class App {
                         }
                         System.out.println("Digite o indice do cliente que quer remover:");
                         int removerCliente = sc.nextInt();
-
-                        removerCliente-=1;
+                        removerCliente -= 1;
                         listaClientes.remove(removerCliente);
                         System.out.println("Cliente removido com sucesso...");
-
-                    } else if (opcao == 5) {
+                    }
+                    case 5 -> {
                         System.out.println("Saindo do módulo cliente...");
-                        break;
-                    } else {
-                        System.out.println("Opção inválida...");
                     }
-
-                } else if (opcaoModulo == 3) {
-                    System.out.println("---------------------------------------------------------------");
-                    System.out.println("----------- Acesso ao sistema de vendas realizado -----------");
-                    System.out.println("---------------------------------------------------------------");
-                    System.out.println("Digite 1 para cadastrar vendas");
-                    System.out.println("Digite 2 para visualizar vendas");
-                    System.out.println("Digite 3 para alterar vendas");
-                    System.out.println("Digite 4 para remover vendas");
-                    System.out.println("Digite 5 para voltar ao módulo principal");
-                    int opcao = sc.nextInt();
-
-                    if (opcao == 1) {
-                        System.out.println("------------------------------------------------------");
-                        System.out.println("----------- Realizando cadastro de Venda -----------");
-                        System.out.println("------------------------------------------------------");
-
-                        System.out.println("Digite o nome do cliente:");
-                        String nomeCliente = sc.next();
-
-                        System.out.println("Digite o cpf do cliente: ");
-                        String cpf = sc.next();
-
-                        System.out.println("Digite o cpf do cliente: ");
-                        String contato = sc.next();
-
-                        Cliente cliente = new Cliente(nomeCliente, cpf, contato);
-                        cliente.mostrarCliente();
-                        listaClientes.add(cliente);
-                    } else if (opcao == 2) {
-                        System.out.println("--------------------------------------------------");
-                        System.out.println("----------- Listando todos os Clientes -----------");
-                        System.out.println("--------------------------------------------------");
-
-                        for (Cliente cliente : listaClientes) {
-                            cliente.mostrarCliente();
-                        }
-                    } else if (opcao == 3) {
-                        System.out.println("-----------------------------------------");
-                        System.out.println("----------- Alterando Cliente -----------");
-                        System.out.println("-----------------------------------------");
-
-                        indiceCliente = 1;
-                        for (Cliente cliente : listaClientes) {
-                            System.out.println("-------------------------------------------");
-                            System.out.println("Cliente" + indiceCliente);
-                            indiceCliente += 1;
-                        }
-
-                        System.out.println("Digite o indice do cliente que você quer alterar:");
-                        int opCliente = sc.nextInt();
-
-                        System.out.println("Digite o novo contato:");
-                        String contatoCliente = sc.next();
-
-                        indiceCliente = 1;
-                        for (Cliente cliente : listaClientes) {
-                            if (indiceCliente == opCliente) {
-                                cliente.setContato(contatoCliente);
-                            }
-                            indiceCliente += 1;
-                        }
-                    } else if (opcao == 4) {
-                        System.out.println("-----------------------------------------");
-                        System.out.println("----------- Removendo Cliente -----------");
-                        System.out.println("-----------------------------------------");
-
-                        indiceCliente = 1;
-                        for (Cliente cliente : listaClientes) {
-                            System.out.println("-------------------------------------------");
-                            System.out.println("Cliente" + indiceCliente);
-                            indiceProduto += 1;
-                        }
-                        System.out.println("Digite o indice do cliente que quer remover:");
-                        int removerCliente = sc.nextInt();
-
-                        removerCliente--;
-
-                    } else if (opcao == 5) {
-                        System.out.println("Saindo do módulo vendas...");
-                        break;
-                    } else {
-                        System.out.println("Opção inválida...");
-                    }
-
-                } else if (opcaoModulo == 4) {
-                    System.out.println("Saindo do sistema");
-                    break;
-                } else {
-                    System.out.println("Opção inválida...");
+                    default -> System.out.println("Opção inválida...");
                 }
+                    }
+                case 3 ->{
+                        System.out.println("---------------------------------------------------------------");
+                        System.out.println("------------ Acesso ao sistema de vendas realizado ------------");
+                        System.out.println("---------------------------------------------------------------");
+                        System.out.println("Digite 1 para cadastrar vendas");
+                        System.out.println("Digite 2 para visualizar vendas");
+                        System.out.println("Digite 3 para alterar vendas");
+                        System.out.println("Digite 4 para remover vendas");
+                        System.out.println("Digite 5 para voltar ao módulo principal");
+                        int opcao = sc.nextInt();
+                        }
+                switch (opcao){
+                    case 1 -> {
+                        System.out.println("------------------------------------------------------");
+                        System.out.println("------------ Realizando registro de Venda ------------");
+                        System.out.println("------------------------------------------------------");
+                        indiceProduto = 1;
+                        for (Produto produto : listaProdutos) {
+                            System.out.println("Produto: " + indiceProduto);
+                            produto.mostrarProduto();
+                            indiceProduto ++;
+                        }
+
+                        System.out.println("Digite o indice do produto que quer registrar a venda: ");
+                        int ProdutoVenda = sc.nextInt();
+                        ProdutoVenda --;
+
+                        indiceProduto= 0;
+
+                        for (Produto produto : listaProdutos) {
+                            if(indiceProduto : ProdutoVenda){
+                                produtoASerVendido = produto;
+                            }
+                            indiceProduto++;
+                        }
+
+                        System.out.println("Digite o indice do produto que quer registrar a venda: ");
+                        int ClienteVenda = sc.nextInt();
+                        ClienteVenda --;
+
+                        indiceCliente= 0;
+
+                        for (Cliente cliente : listaClientes) {
+                            if(indiceCliente : ClienteVenda){
+                                clienteASerVendido = cliente;
+                            }
+                            indiceCliente++;
+                        }
+
+                        Venda venda = new Venda(produtoASerVendido,clienteAserVendido){
+                            listaVendas.add(venda);
+                        }
+                    }
+                    case 2 -> {
+                        System.out.println("--------------------------------------------------");
+                        System.out.println("------------ Listando todos as Vendas ------------");
+                        System.out.println("--------------------------------------------------");
+                        for (Venda venda : listaVendas) {
+                            venda.mostrarVenda();
+                        }
+                    }
+                    case 3 -> {
+                        System.out.println("------------------------------------------");
+                        System.out.println("------------ Alterando Vendas ------------");
+                        System.out.println("------------------------------------------");
+                        indiceVenda = 1;
+                        for (Produto produto && Cliente cliente : listaVendas) {
+                            System.out.println("-------------------------------------------");
+                            System.out.println("Venda " + indiceVenda);
+                            indiceVenda += 1;
+                        }
+                        System.out.println("Digite o indice da venda que você quer alterar:");
+                        int opVenda = sc.nextInt();
+                        System.out.println("Digite o novo produto:");
+                        String produtoVenda = sc.next();
+                        indiceVenda = 1;
+                        for (Venda venda : listaVendas) {
+                            if (indiceVenda == opVenda) {
+                                venda.setVenda(produtoVenda);
+                            }
+                            indiceVenda += 1;
+                        }
+                    }
+                    case 4 -> {
+                        System.out.println("-----------------------------------------");
+                        System.out.println("------------ Removendo Venda ------------");
+                        System.out.println("-----------------------------------------");
+                        indiceVenda = 1;
+                        for (Venda venda : listaVendas) {
+                            System.out.println("-------------------------------------------");
+                            System.out.println("Venda" + indiceVenda);
+                            indiceVenda += 1;
+                        }
+                        System.out.println("Digite o indice da venda que quer remover:");
+                        int removerVenda = sc.nextInt();
+                        removerVenda-= 1;
+                    }
+                    case 5 -> {
+                        System.out.println("Saindo do módulo vendas...");
+                    }
+                    default -> {System.out.println("Opção inválida...");
+                }
+                
+                case 4 -> {
+                    System.out.println("Saindo do sistema");
+                } 
+                        
+                default ->{
+                    System.out.println("Opção inválida..."); 
+                } 
             }
         }
+        sc.close();
     }
 }
