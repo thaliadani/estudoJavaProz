@@ -271,6 +271,66 @@ public class App {
                     System.out.println("Saindo do sistema");
                 }
             }
+else if(opModulo == 3){
+                System.out.println("Registrando venda...");
+
+                // Recebendo produto a ser vendido
+                System.out.println("Selecione o produto que deseja registrar a venda");
+                indiceProduto = 1;
+                    // Percorrendo toda a lista de produtos para mostrar na tela
+                    for(Produto produto : listaProdutos){
+                        System.out.println("-------------------------------------------");
+                        System.out.println("Produto: " + indiceProduto);
+                        produto.mostrarProduto();
+                        indiceProduto += 1;
+                    }
+                System.out.println("Digite o índice do produto que você deseja registrar a venda");
+                int produtoVenda = sc.nextInt();
+                produtoVenda -= 1;
+                // Acessar o produto específico par vender
+                // indice produto é o contador da posicao de cada elemento da lista
+                indiceProduto = 0;
+                // produto venda é o produto escolhido pelo usuário
+                for(Produto produto : listaProdutos){
+                    // Se a posição da lista foi a posição escolhida pelo usuário, nós vamos pegar
+                    // o valor de produto
+                    if (indiceProduto == produtoVenda){
+                        produtoASerVendido = produto;
+                    }
+                    indiceProduto += 1;
+                }
+
+
+                // Recebendo o Cliente a registrar a venda
+                System.out.println("Selecione o produto que deseja registrar a venda");
+                int indiceCliente = 1;
+                    // Percorrendo toda a lista de produtos para mostrar na tela
+                    for(Cliente cliente : listaClientes){
+                        System.out.println("-------------------------------------------");
+                        System.out.println("Cliente: " + indiceCliente);
+                        cliente.mostrarCliente();
+                        indiceCliente += 1;
+                    }
+                System.out.println("Digite o índice do produto que você deseja registrar a venda");
+                int clienteVenda = sc.nextInt();
+                clienteVenda -= 1;
+                
+                // Acessar o Cliente específico par vender
+                // indice Cliente é o contador da posicao de cada elemento da lista
+                indiceCliente = 0;
+                // Cliente venda é o Cliente escolhido pelo usuário
+                for(Cliente cliente : listaClientes){
+                    // Se a posição da lista foi a posição escolhida pelo usuário, nós vamos pegar
+                    // o valor de Cliente
+                    if (indiceCliente == clienteVenda){
+                        clienteASerVendido = cliente;
+                    }
+                    indiceCliente += 1;
+                }
+
+                Venda venda = new Venda(produtoASerVendido, clienteASerVendido);
+                listaVendas.add(venda);
+            }
             
         }
         sc.close();
